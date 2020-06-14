@@ -5,8 +5,8 @@ import (
 	"log"
 	"math/rand"
 
-	"github.com/utrescu/CombatCavallers.Go/lluitador"
 	"github.com/utrescu/CombatCavallers.Go/cops"
+	"github.com/utrescu/CombatCavallers.Go/lluitador"
 )
 
 // Ring és on es desenvolupen els combats
@@ -39,7 +39,7 @@ func (ring *Ring) Lluiteu() ([]Resultat, error) {
 		haRebut := contains(proteccio, pica)
 
 		if haRebut {
-			ring.resultat[elQueRep].TreuVida()
+			ring.resultat[elQueRep].TreuVida(ring.resultat[elQueRep].GetLluitador().GetForca())
 			log.Printf("%s rep un cop %s de %s", ring.resultat[elQueRep].GetNom(), pica, ring.resultat[elQuePica].GetNom())
 		} else {
 			log.Printf("%s atura el cop %s de %s", ring.resultat[elQueRep].GetNom(), pica, ring.resultat[elQuePica].GetNom())

@@ -12,7 +12,7 @@ type IResultat interface {
 // ICombatent definex el que necessita el Ring
 type ICombatent interface {
 	GetLluitador() lluitador.ILluitador
-	TreuVida() int
+	TreuVida(vida int) int
 }
 
 // Resultat és la implementació de les dues interfícies
@@ -47,7 +47,7 @@ func (r Resultat) GetLluitador() lluitador.ILluitador {
 }
 
 // TreuVida és el mètode per treure vida al lluitador
-func (r *Resultat) TreuVida() int {
-	r.vida--
+func (r *Resultat) TreuVida(vida int) int {
+	r.vida = r.vida - vida
 	return r.vida
 }
