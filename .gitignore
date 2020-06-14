@@ -334,3 +334,5 @@ ASALocalRun/
 
 # vscode
 .vscode
+
+target/
