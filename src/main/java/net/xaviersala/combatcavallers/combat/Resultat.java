@@ -30,8 +30,8 @@ public class Resultat implements ICombatents {
 		return Lluitador;
 	}
 
-	public int TreuVida() {
-		Vida--;
+	public int TreuVida(int vida) {
+		Vida-=vida;
 		return Vida;
 	}
 

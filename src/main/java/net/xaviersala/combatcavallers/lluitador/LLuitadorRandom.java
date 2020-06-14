@@ -18,6 +18,8 @@ public class LLuitadorRandom implements ILluitador {
   private Random aleatori = new Random();
 
   private String nom;
+  
+  private int Força = 1;
 
   /**
    * Construeix un boxejador que pica i es protegeix de forma aleatòria
@@ -63,5 +65,10 @@ public class LLuitadorRandom implements ILluitador {
   public String toString() {
     return nom;
   }
+
+	@Override
+	public int ForçaDelCop() {
+		return Força;
+	}
 
 }

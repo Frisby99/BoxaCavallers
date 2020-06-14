@@ -20,5 +20,10 @@ public interface ILluitador {
      * /// @return Retorna el lloc en el que el lluitador pica
      */
     LlocOnPicar Pica();
+    
+    /**
+     * @return Retorna la força del cop
+     */
+    int ForçaDelCop();
 
 }

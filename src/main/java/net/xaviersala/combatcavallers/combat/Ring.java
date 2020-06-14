@@ -62,9 +62,9 @@ public class Ring implements IRing {
 
             boolean haRebut = proteccio.contains(pica);
             if (haRebut) {
-                _Lluitadors.get(elQueRep).TreuVida();
-                LOGGER.log(Level.INFO, _Lluitadors.get(elQueRep).getNom() + " rep un cop al " + pica + " de "
-                        + _Lluitadors.get(elQuePica).getNom());
+                _Lluitadors.get(elQueRep).TreuVida(_Lluitadors.get(elQuePica).getLluitador().ForçaDelCop());
+                LOGGER.log(Level.INFO, _Lluitadors.get(elQueRep).getNom() + "(" + _Lluitadors.get(elQueRep).getVida() + ") rep un cop al " + pica + " de "
+                        + _Lluitadors.get(elQuePica).getNom() + "(" + _Lluitadors.get(elQueRep).getVida() + ")" );
 
             } else {
                 LOGGER.log(Level.INFO, _Lluitadors.get(elQueRep).getNom() + " atura el cop al " + pica + " de "

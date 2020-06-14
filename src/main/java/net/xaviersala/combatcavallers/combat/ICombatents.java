@@ -10,8 +10,8 @@ public interface ICombatents extends IResultat {
 
     /**
      * Treu vida a un combatent
-     * 
+     * @param vida Vida que li treu
      * @return Vida que li queda al combatent
      */
-    int TreuVida();
+    int TreuVida(int vida);
 }
