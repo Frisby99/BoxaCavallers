@@ -1,72 +1,42 @@
 # Boxa entre cavallers
 
-La “boxa entre cavallers” es lleugerament més educada que la tradicional. En aquest tipus de boxa els contendents es claven cops però ho fan de forma ordenada
+La “boxa entre cavallers” és un tipus de boxa pensada per gent educada i d’ordre.
 
-![Combat](combat.png)
+## Normes
 
-El combat consisteix en anar repetint el mateix procés:
+En aquest tipus de boxa en comptes de deixar que els lluitadors es piquin quan vulguin els lluitadors es piquen seguint unes normes molt senzilles
 
-- Primer pica un mentre l’altre es protegeix
-- Després pica el segon mentre el primer es protegeix
+### Norma 1
 
-El combat acaba quan un dels dos cau perquè ha rebut molts cops en llocs desprotegits
+![Boxa in action](img/cop.png)
 
-## Cops i protecció
+Els combatents es van picant alternativament en ordre. Si lluiten A contra B:
 
-Cada boxejador pot picar en quatre llocs diferents del seu contrincant.
+- Primer pica A mentre B es protegeix
+- Després pica B mentre A es protegeix
 
-![Cops](https://raw.githubusercontent.com/XavierSala/Boxa/master/atacs-boxa.png "On pot rebre?")
+I es va repetint fins que un dels dos cau a terra.
 
-Les proteccions que pot fer un boxejador són perfectes. Això vol dir que si rep un cop en una protecció no rebrà cap mal.
+### Norma 2
 
-Desafortunadament el que es protegeix només pot protegir tres llocs. Això vol dir que sempre pot rebre un cop en un lloc desprotegit
+![Boxa rule](img/rule2.jpg)
 
-## Activitat: El combat
+Cada boxejador pot picar en quatre llocs diferents del seu contrincant (cap, costat esquerre, costat dret i panxa).
 
-Es demana que desenvolupeu, fent servir orientació a objectes, un programa que permeti simular el funcionament del combat de boxa entre cavallers i el vagi radiant per pantalla.
+Les proteccions que pot fer un boxejador són perfectes. Això vol dir que si rep un cop en una protecció, no rebrà cap mal. Però el que es protegeix només pot protegir tres llocs. Això vol dir que sempre pot rebre un cop en un lloc desprotegit
 
-```text
-    Ex.
-    $ java -jar Boxa-1.0-SNAPSHOT.jar
-    MatxacaCaps(5) cop bloquejat per DestrossaPilotes(5)
-    DestrossaPilotes(5) cop bloquejat per MatxacaCaps(5)
-    MatxacaCaps(5) cop bloquejat per DestrossaPilotes(5)
-    DestrossaPilotes(5) cop bloquejat per MatxacaCaps(5)
-    MatxacaCaps(5) cop al cap de DestrossaPilotes(4)
-    DestrossaPilotes(4) cop bloquejat per MatxacaCaps(5)
-    MatxacaCaps(5) cop bloquejat per DestrossaPilotes(4)
-    DestrossaPilotes(4) cop bloquejat per MatxacaCaps(5)
-    MatxacaCaps(5) cop al costat dret de DestrossaPilotes(3)
-    DestrossaPilotes(3) cop al costat esquerra de MatxacaCaps(4)
-    MatxacaCaps(4) cop bloquejat per DestrossaPilotes(3)
-    DestrossaPilotes(3) cop bloquejat per MatxacaCaps(4)
-    MatxacaCaps(4) cop bloquejat per DestrossaPilotes(3)
-    DestrossaPilotes(3) cop bloquejat per MatxacaCaps(4)
-    MatxacaCaps(4) cop bloquejat per DestrossaPilotes(3)
-    DestrossaPilotes(3) cop a la panxa de MatxacaCaps(3)
-    MatxacaCaps(3) cop bloquejat per DestrossaPilotes(3)
-    DestrossaPilotes(3) cop bloquejat per MatxacaCaps(3)
-    MatxacaCaps(3) cop bloquejat per DestrossaPilotes(3)
-    DestrossaPilotes(3) cop al costat esquerra de MatxacaCaps(2)
-    MatxacaCaps(2) cop bloquejat per DestrossaPilotes(3)
-    DestrossaPilotes(3) cop bloquejat per MatxacaCaps(2)
-    MatxacaCaps(2) cop bloquejat per DestrossaPilotes(3)
-    DestrossaPilotes(3) cop a la panxa de MatxacaCaps(1)
-    MatxacaCaps(1) cop bloquejat per DestrossaPilotes(3)
-    DestrossaPilotes(3) cop bloquejat per MatxacaCaps(1)
-    MatxacaCaps(1) cop bloquejat per DestrossaPilotes(3)
-    DestrossaPilotes(3) cop bloquejat per MatxacaCaps(1)
-    MatxacaCaps(1) cop al costat esquerra de DestrossaPilotes(2)
-    DestrossaPilotes(2) cop bloquejat per MatxacaCaps(1)
-    MatxacaCaps(1) cop al costat esquerra de DestrossaPilotes(1)
-    DestrossaPilotes(1) cop bloquejat per MatxacaCaps(1)
-    MatxacaCaps(1) cop bloquejat per DestrossaPilotes(1)
-    DestrossaPilotes(1) cop bloquejat per MatxacaCaps(1)
-    MatxacaCaps(1) cop bloquejat per DestrossaPilotes(1)
-    DestrossaPilotes(1) cop bloquejat per MatxacaCaps(1)
-    MatxacaCaps(1) cop bloquejat per DestrossaPilotes(1)
-    DestrossaPilotes(1) cop al costat dret de MatxacaCaps(0)
-    MatxacaCaps(0) està KO!
-```
+Si algú pica en un altre lloc, pot ser desqualificat si ho fa més d’un cop seguit
 
-    Ha guanyat en DestrossaPilotes
+### Norma 3
+
+Abans de començar el combat es tria qui és el primer de picar de forma aleatòria
+
+## Versions
+
+Podeu trobar versions del programa en diferents llenguatges en les diferents branques:
+
+- VersioCSharp (C#)
+- VersioJava (Java)
+- VersioPython (Python)
+- VersioRust (Rust)
+- VersioGo (Go)
