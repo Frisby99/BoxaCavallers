@@ -13,7 +13,8 @@ namespace CombatCavallers.Combat
         /// <summary>
         /// Treu vida a un combatent
         /// </summary>
+        /// <param name="forca">Força del cop</param>
         /// <returns>Vida que li queda al combatent</returns>
-        int TreuVida();
+        int TreuVida(int forca);
     }
 }

@@ -18,9 +18,9 @@ namespace CombatCavallers.Combat
             Vida = vida;
         }
 
-        public int TreuVida()
+        public int TreuVida(int forca)
         {
-            Vida--;
+            Vida -= forca;
             return Vida;
         }
 

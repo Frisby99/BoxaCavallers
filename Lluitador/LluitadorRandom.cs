@@ -20,6 +20,7 @@ namespace CombatCavallers.Lluitador
         }
 
         public string Nom { get; }
+        public int Forca { get; set; } = 1;
 
         public LlocOnPicar Pica()
         {

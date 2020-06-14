@@ -57,8 +57,8 @@ namespace CombatCavallers.Combat
                 var haRebut = proteccio.Any(l => l == pica);
                 if (haRebut)
                 {
-                    _Lluitadors[elQueRep].TreuVida();
-                    _logger.LogInformation($"{_Lluitadors[elQueRep].Nom} rep un cop al {pica} de {_Lluitadors[elQuePica].Nom}");
+                    _Lluitadors[elQueRep].TreuVida(_Lluitadors[elQuePica].Lluitador.Forca);
+                    _logger.LogInformation($"{_Lluitadors[elQueRep].Nom} ({_Lluitadors[elQueRep].Vida}) rep un cop al {pica} de {_Lluitadors[elQuePica].Nom} ({_Lluitadors[elQuePica].Vida})");
                 }
                 else
                 {

@@ -6,6 +6,8 @@ namespace CombatCavallers.Lluitador
     public interface ILluitador
     {
         string Nom { get; }
+        int Forca { get; set; }
+
         /// <summary>
         /// Retorna una llista amb els llocs que el combatent protegeix
         /// </summary>
@@ -17,5 +19,6 @@ namespace CombatCavallers.Lluitador
         /// </summary>
         /// <returns></returns>
         LlocOnPicar Pica();
+
     }
 }
