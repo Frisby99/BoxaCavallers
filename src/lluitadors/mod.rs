@@ -3,6 +3,7 @@ use super::combat::lluitador as lluita;
 /// Implementació de jugador que fa les coses aleatòriament
 pub struct LluitadorRandom {
     nom: String,
+    forca: i32,
 }
 
 impl LluitadorRandom {
@@ -13,7 +14,7 @@ impl LluitadorRandom {
     ///
     /// * n: nom de lluitador
     pub fn new(n: String) -> LluitadorRandom {
-        LluitadorRandom { nom: n }
+        LluitadorRandom { nom: n, forca: 1 }
     }
 }
 
@@ -40,5 +41,9 @@ impl lluita::ILluitador for LluitadorRandom {
         llocs.remove(index);
 
         llocs
+    }
+
+    fn get_forca(&self) -> i32 {
+        self.forca
     }
 }

@@ -13,6 +13,7 @@ where
     fn get_nom<'a>(&'a self) -> &'a str;
     fn get_punts(&self) -> i32;
     fn es_ko(&self) -> bool;
+    fn get_forca(&self) -> i32;
 }
 
 /// Estructura interna perquè el Ring pugui treballar amb el
@@ -21,7 +22,7 @@ trait ICombatent
 where
     Self: Sized,
 {
-    fn treu_vida(&mut self) -> i32;
+    fn treu_vida(&mut self, vida: i32) -> i32;
     fn pica(&self) -> lluitador::LlocOnPicar;
     fn protegeix(&self) -> Vec<lluitador::LlocOnPicar>;
 }
@@ -47,6 +48,10 @@ impl IResultat for Resultat {
         &self.lluitador.get_nom_lluitador()
     }
 
+    fn get_forca(&self) -> i32 {
+        self.lluitador.get_forca()
+    }
+
     fn get_punts(&self) -> i32 {
         self.vida
     }
@@ -65,8 +70,8 @@ impl ICombatent for Resultat {
         self.lluitador.protegeix()
     }
 
-    fn treu_vida(&mut self) -> i32 {
-        self.vida = self.vida - 1;
+    fn treu_vida(&mut self, vida: i32) -> i32 {
+        self.vida = self.vida - vida;
         self.vida
     }
 }
@@ -142,7 +147,8 @@ impl IRing for Ring {
                     self.resultat[qui_pica].get_punts()
                 );
             } else {
-                self.resultat[qui_rep].treu_vida();
+                let forca = &self.resultat[qui_pica].get_forca();
+                self.resultat[qui_rep].treu_vida(*forca);
                 print!(
                     "{}({}) rep un cop a {:?} de {}({})\n",
                     self.resultat[qui_rep].get_nom(),

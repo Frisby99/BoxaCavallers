@@ -58,6 +58,8 @@ pub trait ILluitador {
 
     /// Retorna el lloc on pica el lluitador
     fn pica(&self) -> LlocOnPicar;
+
+    fn get_forca(&self) -> i32;
 }
 
 impl fmt::Debug for dyn ILluitador {
