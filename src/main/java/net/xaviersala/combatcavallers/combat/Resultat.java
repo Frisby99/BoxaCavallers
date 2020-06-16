@@ -6,10 +6,12 @@ public class Resultat implements ICombatents {
 
 	int Vida;
 	ILluitador Lluitador;
+	boolean Eliminat;
 
 	public Resultat(ILluitador lluitador, int vida) {
 		Lluitador = lluitador;
 		Vida = vida;
+		Eliminat = false;
 	}
 
 	public String getNom() {
@@ -34,9 +36,21 @@ public class Resultat implements ICombatents {
 		Vida-=vida;
 		return Vida;
 	}
+	
+	@Override
+	public boolean EstaEliminat() {
+		return Eliminat;
+	}
+
+	@Override
+	public void Elimina() {
+		Eliminat = true;		
+	}
 
 	public String toString() {
 		return Lluitador.getNom() + "(" + Vida + ")";
 	}
+
+
 
 }

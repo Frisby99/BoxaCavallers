@@ -4,5 +4,5 @@ public enum LlocOnPicar {
     /**
      * Llocs en els que pot picar un Combatent
      */
-    Cap, CostatEsquerra, CostatDret, Panxa
+    Cap, CostatEsquerra, CostatDret, Panxa, CopIlegal
 }

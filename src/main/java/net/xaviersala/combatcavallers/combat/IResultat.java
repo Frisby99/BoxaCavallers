@@ -24,4 +24,14 @@ public interface IResultat {
      * @return Si està derrotat
      */
     boolean EsKo();
+    
+    /**
+     * @return determina si el lluitador està eliminat
+     */
+    boolean EstaEliminat();
+    
+    /**
+     * Elimina el lluitador
+     */
+    void Elimina();
 }

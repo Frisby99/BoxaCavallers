@@ -1,5 +1,6 @@
 package net.xaviersala.combatcavallers.lluitador;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -15,56 +16,60 @@ import net.xaviersala.combatcavallers.LlocOnPicar;
  */
 public class LLuitadorRandom implements ILluitador {
 
-  private Random aleatori = new Random();
+	private Random aleatori = new Random();
 
-  private String nom;
-  
-  private int Força = 1;
+	private String nom;
 
-  /**
-   * Construeix un boxejador que pica i es protegeix de forma aleatòria
-   *
-   * @param nomBoxejador nom del boxejador
-   */
-  public LLuitadorRandom(String nomBoxejador) {
-    nom = nomBoxejador;
-  }
+	private int Força = 1;
 
-  /**
-   * El boxejador pica en una de les posicions de l'altre boxejador
-   *
-   * @return posició on pica
-   */
-  public LlocOnPicar Pica() {
-    return LlocOnPicar.values()[aleatori.nextInt(LlocOnPicar.values().length)];
-  }
+	List<LlocOnPicar> copsPossibles;
 
-  /**
-   * El boxejador no protegeix una de les posicions en les que pot rebre un cop.
-   *
-   * @return posició no protegida
-   */
-  public List<LlocOnPicar> Protegeix() {
-    List<LlocOnPicar> proteccio = Arrays.asList(LlocOnPicar.values());
+	/**
+	 * Construeix un boxejador que pica i es protegeix de forma aleatòria
+	 *
+	 * @param nomBoxejador nom del boxejador
+	 */
+	public LLuitadorRandom(String nomBoxejador) {
+		nom = nomBoxejador;
+		copsPossibles = new ArrayList<>(Arrays.asList(LlocOnPicar.values()));
+		copsPossibles.remove(LlocOnPicar.CopIlegal);
+	}
 
-    LlocOnPicar noProtegeix = LlocOnPicar.values()[aleatori.nextInt(LlocOnPicar.values().length)];
+	/**
+	 * El boxejador pica en una de les posicions de l'altre boxejador
+	 *
+	 * @return posició on pica
+	 */
+	public LlocOnPicar Pica() {
+		return copsPossibles.get(aleatori.nextInt(copsPossibles.size()));
+	}
 
-    return proteccio.stream().filter(item -> item != noProtegeix).collect(Collectors.toList());
-  }
+	/**
+	 * El boxejador no protegeix una de les posicions en les que pot rebre un cop.
+	 *
+	 * @return posició no protegida
+	 */
+	public List<LlocOnPicar> Protegeix() {
+		List<LlocOnPicar> proteccio = copsPossibles;
 
-  /**
-   * @return retorna el nom del boxejador.
-   */
-  public String getNom() {
-    return nom;
-  }
+		LlocOnPicar noProtegeix = copsPossibles.get(aleatori.nextInt(copsPossibles.size()));
 
-  /**
-   * Imatge del boxejador en text.
-   */
-  public String toString() {
-    return nom;
-  }
+		return proteccio.stream().filter(item -> item != noProtegeix).collect(Collectors.toList());
+	}
+
+	/**
+	 * @return retorna el nom del boxejador.
+	 */
+	public String getNom() {
+		return nom;
+	}
+
+	/**
+	 * Imatge del boxejador en text.
+	 */
+	public String toString() {
+		return nom;
+	}
 
 	@Override
 	public int ForçaDelCop() {
