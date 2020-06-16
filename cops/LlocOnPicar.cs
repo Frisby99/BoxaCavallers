@@ -12,6 +12,7 @@ namespace CombatCavallers.cops
         Cap = 0,
         CostatEsquerra = 1,
         CostatDret = 2,
-        Panxa = 3
+        Panxa = 3,
+        CopIlegal = 4
     }
 }

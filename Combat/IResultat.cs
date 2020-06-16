@@ -20,5 +20,16 @@
         /// </summary>
         /// <returns>Retorna si el lluitador està KO o no</returns>
         bool EsKo();
+
+        /// <summary>
+        /// Comprova si està eliminat
+        /// </summary>
+        bool EstaEliminat();
+
+        /// <summary>
+        /// Elimina el lluitador
+        /// </sumary>
+        void Elimina();
+
     }
 }

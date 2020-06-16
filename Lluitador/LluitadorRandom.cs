@@ -12,10 +12,14 @@ namespace CombatCavallers.Lluitador
     class LluitadorRandom : ILluitador
     {
         private readonly Random rnd;
+        private readonly List<LlocOnPicar> copsPossibles;
 
         public LluitadorRandom(string nom)
         {
             rnd = new Random(Guid.NewGuid().GetHashCode());
+            copsPossibles = Enum.GetValues(typeof(LlocOnPicar)).Cast<LlocOnPicar>().ToList();
+            copsPossibles.Remove(LlocOnPicar.CopIlegal);
+
             Nom = nom;
         }
 
@@ -24,7 +28,8 @@ namespace CombatCavallers.Lluitador
 
         public LlocOnPicar Pica()
         {
-            return (LlocOnPicar)rnd.Next(Enum.GetNames(typeof(LlocOnPicar)).Length);
+            int index = rnd.Next(copsPossibles.Count);
+            return copsPossibles[index];
         }
 
         public IEnumerable<LlocOnPicar> Protegeix()

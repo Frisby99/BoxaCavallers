@@ -12,10 +12,13 @@ namespace CombatCavallers.Combat
         public string Nom => Lluitador.Nom;
         public int Vida { get; private set; }
 
+        public bool Eliminat { get; set; }
+
         public Resultat(ILluitador lluitador, int vida)
         {
             Lluitador = lluitador;
             Vida = vida;
+            Eliminat = false;
         }
 
         public int TreuVida(int forca)
@@ -27,6 +30,13 @@ namespace CombatCavallers.Combat
         public bool EsKo()
         {
             return Vida == 0;
+        }
+
+        public bool EstaEliminat() => Eliminat;
+
+        public void Elimina()
+        {
+            Eliminat = true;
         }
     }
 }

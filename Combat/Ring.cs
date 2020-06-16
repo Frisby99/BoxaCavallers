@@ -1,4 +1,5 @@
-﻿using CombatCavallers.Lluitador;
+﻿using CombatCavallers.cops;
+using CombatCavallers.Lluitador;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,14 @@ namespace CombatCavallers.Combat
 
         private readonly Random _rnd;
         private readonly ICombatents[] _Lluitadors;
+        private int[] copsIlegals;
         private readonly ILogger<Ring> _logger;
 
         public Ring(ILogger<Ring> logger)
         {
             _rnd = new Random();
             _Lluitadors = new Resultat[2];
+            copsIlegals = new int[2];
             _logger = logger;
         }
 
@@ -30,6 +33,7 @@ namespace CombatCavallers.Combat
         {
             _Lluitadors[0] = new Resultat(lluitador1, VidaInicialDelsCombatents);
             _Lluitadors[1] = new Resultat(lluitador2, VidaInicialDelsCombatents);
+            copsIlegals = new int[2];
         }
 
         /// <summary>
@@ -48,13 +52,13 @@ namespace CombatCavallers.Combat
             var elQuePica = _rnd.Next(2);
             _logger.LogInformation($"Sorteig de qui comença: .... {_Lluitadors[elQuePica].Nom}");
 
-            while (_Lluitadors.All(l => l.EsKo() == false))
+            while (_Lluitadors.All(l => l.EsKo() == false && l.EstaEliminat() == false))
             {
                 var elQueRep = (elQuePica + 1) % 2;
                 var proteccio = _Lluitadors[elQueRep].Lluitador.Protegeix();
                 var pica = _Lluitadors[elQuePica].Lluitador.Pica();
 
-                var haRebut = proteccio.Any(l => l == pica);
+                var haRebut = proteccio.Any(l => l == pica) || pica == LlocOnPicar.CopIlegal;
                 if (haRebut)
                 {
                     _Lluitadors[elQueRep].TreuVida(_Lluitadors[elQuePica].Lluitador.Forca);
@@ -65,14 +69,33 @@ namespace CombatCavallers.Combat
                     _logger.LogInformation($"{_Lluitadors[elQueRep].Nom} atura el cop al {pica} de {_Lluitadors[elQuePica].Nom}");
                 }
 
+                if (pica is LlocOnPicar.CopIlegal)
+                {
+                    copsIlegals[elQuePica]++;
+                    if (copsIlegals[elQuePica] == 3)
+                    {
+                        _logger.LogInformation($" {_Lluitadors[elQuePica].Nom} ELIMINAT PER COPS ILEGALS");
+                        _Lluitadors[elQueRep].Elimina();
+                    }
+                }
+
                 _logger.LogDebug($"{_Lluitadors[0].Nom}-({_Lluitadors[0].Vida}) vs {_Lluitadors[1].Nom}-({_Lluitadors[1].Vida})");
                 elQuePica = elQueRep;
             }
 
-            var guanyador = _Lluitadors.First(l => l.EsKo() == false);
-            var perdedor = _Lluitadors.First(l => l.EsKo() == true);
+            var guanyador = _Lluitadors.First(l => l.EsKo() == false && l.EstaEliminat() == false);
+            var perdedor = _Lluitadors.First(l => l.EsKo() == true || l.EstaEliminat() == true);
 
-            var comentariLocutor = (guanyador.Vida - perdedor.Vida) > 5 ? "Quina Pallissa!!" : "";
+            var comentariLocutor = "";
+
+            if (perdedor.EstaEliminat())
+            {
+                comentariLocutor = $"{perdedor.Nom} està ELIMINAT!";
+            }
+            else
+            {
+                comentariLocutor = (guanyador.Vida - perdedor.Vida) > 5 ? "Quina Pallissa!!" : "";
+            }
 
             _logger.LogInformation($"{perdedor.Nom} cau a terra!");
             _logger.LogInformation($"VICTÒRIA DE {guanyador.Nom}!!! {comentariLocutor}");
