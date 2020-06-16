@@ -7,6 +7,8 @@ type IResultat interface {
 	GetNom() string
 	GetVida() int
 	EsKo() bool
+	EstaEliminat() bool
+	Elimina()
 }
 
 // ICombatent definex el que necessita el Ring
@@ -19,11 +21,12 @@ type ICombatent interface {
 type Resultat struct {
 	lluitador lluitador.ILluitador
 	vida      int
+	eliminat  bool
 }
 
 // CreateResultat crea un objecte de tipus resultat
 func CreateResultat(lluitador1 lluitador.ILluitador, vida int) Resultat {
-	return Resultat{lluitador1, vida}
+	return Resultat{lluitador1, vida, false}
 }
 
 // GetNom retorna el nom del lluitador
@@ -39,6 +42,16 @@ func (r Resultat) GetVida() int {
 // EsKo informa de si el lluitador ha quedat Ko
 func (r Resultat) EsKo() bool {
 	return r.vida == 0
+}
+
+// EstaEliminat informa de si el lluitador ha quedat eliminat
+func (r Resultat) EstaEliminat() bool {
+	return r.eliminat
+}
+
+// Elimina elimina el lluitador
+func (r *Resultat) Elimina() {
+	r.eliminat = true
 }
 
 // GetLluitador retorna el lluitador

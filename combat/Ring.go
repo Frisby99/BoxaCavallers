@@ -11,7 +11,8 @@ import (
 
 // Ring és on es desenvolupen els combats
 type Ring struct {
-	resultat []Resultat
+	resultat    []Resultat
+	copsIlegals []int
 }
 
 // EntrenJugadors entren els jugadors al ring
@@ -19,6 +20,9 @@ func (ring *Ring) EntrenJugadors(jugador1 lluitador.ILluitador, jugador2 lluitad
 	ring.resultat = make([]Resultat, 2)
 	ring.resultat[0] = CreateResultat(jugador1, 20)
 	ring.resultat[1] = CreateResultat(jugador2, 20)
+	ring.copsIlegals = make([]int, 2)
+	ring.copsIlegals[0] = 0
+	ring.copsIlegals[1] = 0
 }
 
 // Lluiteu és la ordre de començar el combat
@@ -36,13 +40,21 @@ func (ring *Ring) Lluiteu() ([]Resultat, error) {
 		proteccio := ring.resultat[elQueRep].GetLluitador().Protegeix()
 		pica := ring.resultat[elQuePica].GetLluitador().Pica()
 
-		haRebut := contains(proteccio, pica)
+		haRebut := contains(proteccio, pica) || pica == cops.Collons
 
 		if haRebut {
 			ring.resultat[elQueRep].TreuVida(ring.resultat[elQueRep].GetLluitador().GetForca())
 			log.Printf("%s rep un cop %s de %s", ring.resultat[elQueRep].GetNom(), pica, ring.resultat[elQuePica].GetNom())
 		} else {
 			log.Printf("%s atura el cop %s de %s", ring.resultat[elQueRep].GetNom(), pica, ring.resultat[elQuePica].GetNom())
+		}
+
+		if pica == cops.Collons {
+			ring.copsIlegals[elQuePica]++
+			if ring.copsIlegals[elQuePica] == 3 {
+				ring.resultat[elQuePica].Elimina()
+				break
+			}
 		}
 
 		log.Printf("%s-(%d) vs %s-(%d)", ring.resultat[0].GetNom(), ring.resultat[0].GetVida(),
@@ -52,17 +64,22 @@ func (ring *Ring) Lluiteu() ([]Resultat, error) {
 
 	guanyador := ring.resultat[1]
 	perdedor := ring.resultat[0]
-	if ring.resultat[1].EsKo() {
+	if ring.resultat[1].EsKo() || ring.resultat[1].EstaEliminat() {
 		guanyador = ring.resultat[0]
 		perdedor = ring.resultat[1]
 	}
 
 	comentariLocutor := ""
-	if (guanyador.GetVida() - perdedor.GetVida()) > 5 {
-		comentariLocutor = "Quina Pallissa!!"
+
+	if perdedor.EstaEliminat() {
+		comentariLocutor = perdedor.GetNom() + " està ELIMINAT per cops il·legals"
+	} else {
+		log.Printf("%s cau a terra!", perdedor.GetNom())
+		if (guanyador.GetVida() - perdedor.GetVida()) > 5 {
+			comentariLocutor = "Quina Pallissa!!"
+		}
 	}
 
-	log.Printf("%s cau a terra!", perdedor.GetNom())
 	log.Printf("VICTÒRIA DE %s!!! %s", guanyador.GetNom(), comentariLocutor)
 
 	return ring.resultat, nil
