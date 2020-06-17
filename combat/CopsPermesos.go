@@ -5,6 +5,7 @@ import "github.com/utrescu/CombatCavallers.Go/cops"
 // CopsPermesos defineix els cops permesos en la batalla
 type CopsPermesos struct{}
 
+// GetTotsElsCops diu en quins llocs es pot picar ja sigui permès o no
 func (c CopsPermesos) GetTotsElsCops() []cops.LlocOnPicar {
 	return []cops.LlocOnPicar{
 		cops.Cap,
