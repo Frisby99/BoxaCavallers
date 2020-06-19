@@ -18,13 +18,17 @@ namespace CombatCavallers.Lluitador
         {
             rnd = new Random(Guid.NewGuid().GetHashCode());
             copsPossibles = Enum.GetValues(typeof(LlocOnPicar)).Cast<LlocOnPicar>().ToList();
-            copsPossibles.Remove(LlocOnPicar.CopIlegal);
+            copsPossibles = new List<LlocOnPicar> {
+                LlocOnPicar.Cap,
+                LlocOnPicar.CostatDret,
+                LlocOnPicar.CostatEsquerra,
+                LlocOnPicar.Panxa
+             };
 
             Nom = nom;
         }
 
         public string Nom { get; }
-        public int Forca { get; set; } = 1;
 
         public LlocOnPicar Pica()
         {
@@ -34,8 +38,8 @@ namespace CombatCavallers.Lluitador
 
         public IEnumerable<LlocOnPicar> Protegeix()
         {
-            var punts = Enum.GetValues(typeof(LlocOnPicar)).Cast<LlocOnPicar>();
-            var noProtegir = (LlocOnPicar)rnd.Next(Enum.GetNames(typeof(LlocOnPicar)).Length);
+            var punts = new List<LlocOnPicar>(copsPossibles);
+            var noProtegir = (LlocOnPicar)rnd.Next(copsPossibles.Count);
             return punts.Where(val => val != noProtegir).ToArray(); ;
         }
     }

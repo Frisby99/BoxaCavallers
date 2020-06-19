@@ -58,11 +58,36 @@ namespace CombatCavallers.Combat
                 var proteccio = _Lluitadors[elQueRep].Lluitador.Protegeix();
                 var pica = _Lluitadors[elQuePica].Lluitador.Pica();
 
+                var efecteSobreDefensor = 0;
+                var efecteSobreAtacant = 0;
+                var missatge = "";
+
+                switch (pica)
+                {
+                    case LlocOnPicar.Cap:
+                    case LlocOnPicar.CostatDret:
+                    case LlocOnPicar.CostatEsquerra:
+                    case LlocOnPicar.Panxa:
+                        efecteSobreDefensor = 1;
+                        efecteSobreAtacant = 0;
+                        missatge = $"{_Lluitadors[elQueRep].Nom} ({_Lluitadors[elQueRep].Vida}) rep un cop al {pica} de {_Lluitadors[elQuePica].Nom} ({_Lluitadors[elQuePica].Vida})";
+                        break;
+                    case LlocOnPicar.CopIlegal:
+                        efecteSobreDefensor = 1;
+                        efecteSobreAtacant = 0;
+                        missatge = $"{_Lluitadors[elQueRep].Nom} ({_Lluitadors[elQueRep].Vida}) rep un cop ILEGAL de {_Lluitadors[elQuePica].Nom} ({_Lluitadors[elQuePica].Vida})";
+                        break;
+                    default:
+                        missatge = "No ha passat res";
+                        break;
+                }
+
                 var haRebut = proteccio.Any(l => l == pica) || pica == LlocOnPicar.CopIlegal;
                 if (haRebut)
                 {
-                    _Lluitadors[elQueRep].TreuVida(_Lluitadors[elQuePica].Lluitador.Forca);
-                    _logger.LogInformation($"{_Lluitadors[elQueRep].Nom} ({_Lluitadors[elQueRep].Vida}) rep un cop al {pica} de {_Lluitadors[elQuePica].Nom} ({_Lluitadors[elQuePica].Vida})");
+                    _Lluitadors[elQueRep].TreuVida(efecteSobreDefensor);
+                    _Lluitadors[elQuePica].TreuVida(efecteSobreAtacant);
+                    _logger.LogInformation(missatge);
                 }
                 else
                 {
