@@ -59,32 +59,59 @@ public class Ring implements IRing {
         int elQuePica = aleatori.nextInt(2);
         LOGGER.log(Level.INFO, "Sorteig de qui comença: ....  " + _Lluitadors.get(elQuePica).getNom());
 
-        while (!_Lluitadors.get(0).EsKo() && !_Lluitadors.get(0).EstaEliminat() 
-        	   && !_Lluitadors.get(1).EsKo() && !_Lluitadors.get(1).EstaEliminat() ) {
-        	
+        while (!_Lluitadors.get(0).EsKo() && !_Lluitadors.get(0).EstaEliminat() && !_Lluitadors.get(1).EsKo()
+                && !_Lluitadors.get(1).EstaEliminat()) {
+
             int elQueRep = (elQuePica + 1) % 2;
             List<LlocOnPicar> proteccio = _Lluitadors.get(elQueRep).getLluitador().Protegeix();
             LlocOnPicar pica = _Lluitadors.get(elQuePica).getLluitador().Pica();
 
+            int efecteSobreDefensor = 0;
+            int efecteSobreAtacant = 0;
+            String missatge = "";
+
+            switch (pica) {
+                case Cap:
+                case CostatDret:
+                case CostatEsquerra:
+                case Panxa:
+                    efecteSobreDefensor = 1;
+                    efecteSobreAtacant = 0;
+                    missatge = _Lluitadors.get(elQueRep).getNom() + "(" + _Lluitadors.get(elQueRep).getVida()
+                            + ") rep un cop al " + pica + " de " + _Lluitadors.get(elQuePica).getNom() + "("
+                            + _Lluitadors.get(elQueRep).getVida() + ")";
+                    break;
+                case CopIlegal:
+                    efecteSobreDefensor = 1;
+                    efecteSobreAtacant = 0;
+                    missatge = _Lluitadors.get(elQueRep).getNom() + "(" + _Lluitadors.get(elQueRep).getVida()
+                            + ") rep un cop ILEGAL de " + _Lluitadors.get(elQuePica).getNom() + "("
+                            + _Lluitadors.get(elQueRep).getVida() + ")";
+                    ;
+                    break;
+                default:
+                    missatge = "No ha passat res";
+                    break;
+            }
+
             boolean haRebut = proteccio.contains(pica) || pica == LlocOnPicar.CopIlegal;
             if (haRebut) {
-                _Lluitadors.get(elQueRep).TreuVida(_Lluitadors.get(elQuePica).getLluitador().ForçaDelCop());
-                LOGGER.log(Level.INFO, _Lluitadors.get(elQueRep).getNom() + "(" + _Lluitadors.get(elQueRep).getVida() + ") rep un cop al " + pica + " de "
-                        + _Lluitadors.get(elQuePica).getNom() + "(" + _Lluitadors.get(elQueRep).getVida() + ")" );
+                _Lluitadors.get(elQueRep).TreuVida(efecteSobreDefensor);
+                _Lluitadors.get(elQuePica).TreuVida(efecteSobreAtacant);
+                LOGGER.log(Level.INFO, missatge);
 
             } else {
                 LOGGER.log(Level.INFO, _Lluitadors.get(elQueRep).getNom() + " atura el cop al " + pica + " de "
                         + _Lluitadors.get(elQuePica).getNom());
             }
-            
+
             if (pica == LlocOnPicar.CopIlegal) {
-            	copsIlegals.set(elQuePica, copsIlegals.get(elQuePica) + 1);
-            	if (copsIlegals.get(elQuePica) == 3) {
-            		_Lluitadors.get(elQuePica).Elimina();
-            	}
+                copsIlegals.set(elQuePica, copsIlegals.get(elQuePica) + 1);
+                if (copsIlegals.get(elQuePica) == 3) {
+                    _Lluitadors.get(elQuePica).Elimina();
+                }
             }
 
-            LOGGER.log(Level.WARNING, _Lluitadors.get(0) + " vs " + _Lluitadors.get(1));
             elQuePica = elQueRep;
         }
 
@@ -95,17 +122,16 @@ public class Ring implements IRing {
         ILluitador perdedor = _Lluitadors.get(perd).getLluitador();
 
         String comentariLocutor = "";
-        
+
         if (_Lluitadors.get(perd).EstaEliminat()) {
-        	comentariLocutor = perdedor.getNom() + " està ELIMINAT per cops il·legals";
+            comentariLocutor = perdedor.getNom() + " està ELIMINAT per cops il·legals";
         } else {
-        	LOGGER.log(Level.INFO, perdedor.getNom() + " cau a terra!");
-            if (_Lluitadors.get(guanya).getVida() - _Lluitadors.get(perd).getVida() > PALLISSA)
-            {  
-            	comentariLocutor = "Quina Pallissa!!";
+            LOGGER.log(Level.INFO, perdedor.getNom() + " cau a terra!");
+            if (_Lluitadors.get(guanya).getVida() - _Lluitadors.get(perd).getVida() > PALLISSA) {
+                comentariLocutor = "Quina Pallissa!!";
             }
         }
-        
+
         LOGGER.log(Level.INFO, "VICTÒRIA DE " + guanyador.getNom() + "!!! " + comentariLocutor);
 
         return toIResultat();

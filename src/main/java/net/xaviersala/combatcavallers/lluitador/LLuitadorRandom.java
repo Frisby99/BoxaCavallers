@@ -20,8 +20,6 @@ public class LLuitadorRandom implements ILluitador {
 
 	private String nom;
 
-	private int Força = 1;
-
 	List<LlocOnPicar> copsPossibles;
 
 	/**
@@ -69,11 +67,6 @@ public class LLuitadorRandom implements ILluitador {
 	 */
 	public String toString() {
 		return nom;
-	}
-
-	@Override
-	public int ForçaDelCop() {
-		return Força;
 	}
 
 }
