@@ -6,3 +6,5 @@ public enum LlocOnPicar {
      */
     Cap, CostatEsquerra, CostatDret, Panxa, CopIlegal
 }
+
+

@@ -19,6 +19,6 @@ public interface ILluitador {
     /**
      * /// @return Retorna el lloc en el que el lluitador pica
      */
-    LlocOnPicar Pica();
+    AtacResult Pica();
 
 }

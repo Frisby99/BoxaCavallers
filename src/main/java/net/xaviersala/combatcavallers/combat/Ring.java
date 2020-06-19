@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.xaviersala.combatcavallers.LlocOnPicar;
+import net.xaviersala.combatcavallers.lluitador.AtacResult;
 import net.xaviersala.combatcavallers.lluitador.ILluitador;
 
 /**
@@ -64,7 +65,8 @@ public class Ring implements IRing {
 
             int elQueRep = (elQuePica + 1) % 2;
             List<LlocOnPicar> proteccio = _Lluitadors.get(elQueRep).getLluitador().Protegeix();
-            LlocOnPicar pica = _Lluitadors.get(elQuePica).getLluitador().Pica();
+            AtacResult atac = _Lluitadors.get(elQuePica).getLluitador().Pica();
+            LlocOnPicar pica = atac.getLlocOnPicar();
 
             int efecteSobreDefensor = 0;
             int efecteSobreAtacant = 0;

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import net.xaviersala.combatcavallers.Atac;
 import net.xaviersala.combatcavallers.LlocOnPicar;
 
 /**
@@ -38,8 +39,8 @@ public class LLuitadorRandom implements ILluitador {
 	 *
 	 * @return posició on pica
 	 */
-	public LlocOnPicar Pica() {
-		return copsPossibles.get(aleatori.nextInt(copsPossibles.size()));
+	public AtacResult Pica() {
+		return new AtacResult(Atac.Normal, copsPossibles.get(aleatori.nextInt(copsPossibles.size())));
 	}
 
 	/**
