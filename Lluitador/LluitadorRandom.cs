@@ -30,10 +30,10 @@ namespace CombatCavallers.Lluitador
 
         public string Nom { get; }
 
-        public LlocOnPicar Pica()
+        public (Atac, LlocOnPicar) Pica()
         {
             int index = rnd.Next(copsPossibles.Count);
-            return copsPossibles[index];
+            return (Atac.Normal, copsPossibles[index]);
         }
 
         public IEnumerable<LlocOnPicar> Protegeix()

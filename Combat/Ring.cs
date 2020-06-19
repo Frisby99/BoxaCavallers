@@ -48,7 +48,6 @@ namespace CombatCavallers.Combat
                 return null;
             }
 
-
             var elQuePica = _rnd.Next(2);
             _logger.LogInformation($"Sorteig de qui comença: .... {_Lluitadors[elQuePica].Nom}");
 
@@ -56,7 +55,7 @@ namespace CombatCavallers.Combat
             {
                 var elQueRep = (elQuePica + 1) % 2;
                 var proteccio = _Lluitadors[elQueRep].Lluitador.Protegeix();
-                var pica = _Lluitadors[elQuePica].Lluitador.Pica();
+                var (_, pica) = _Lluitadors[elQuePica].Lluitador.Pica();
 
                 var efecteSobreDefensor = 0;
                 var efecteSobreAtacant = 0;

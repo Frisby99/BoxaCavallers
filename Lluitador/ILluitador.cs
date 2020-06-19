@@ -17,7 +17,7 @@ namespace CombatCavallers.Lluitador
         /// Retorna el lloc en el que el combatent pica
         /// </summary>
         /// <returns></returns>
-        LlocOnPicar Pica();
+        (Atac, LlocOnPicar) Pica();
 
     }
 }
