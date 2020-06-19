@@ -17,14 +17,17 @@ namespace CombatCavallers.Lluitador
         public LluitadorRandom(string nom)
         {
             rnd = new Random(Guid.NewGuid().GetHashCode());
-            copsPossibles = Enum.GetValues(typeof(LlocOnPicar)).Cast<LlocOnPicar>().ToList();
-            copsPossibles.Remove(LlocOnPicar.CopIlegal);
+            copsPossibles = new List<LlocOnPicar> {
+                LlocOnPicar.Cap,
+                LlocOnPicar.CostatDret,
+                LlocOnPicar.CostatEsquerra,
+                LlocOnPicar.Panxa
+             };
 
             Nom = nom;
         }
 
         public string Nom { get; }
-        public int Forca { get; set; } = 1;
 
         public LlocOnPicar Pica()
         {

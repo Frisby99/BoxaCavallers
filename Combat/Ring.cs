@@ -58,10 +58,12 @@ namespace CombatCavallers.Combat
                 var proteccio = _Lluitadors[elQueRep].Lluitador.Protegeix();
                 var pica = _Lluitadors[elQuePica].Lluitador.Pica();
 
+                var forca = 1;
+
                 var haRebut = proteccio.Any(l => l == pica) || pica == LlocOnPicar.CopIlegal;
                 if (haRebut)
                 {
-                    _Lluitadors[elQueRep].TreuVida(_Lluitadors[elQuePica].Lluitador.Forca);
+                    _Lluitadors[elQueRep].TreuVida(forca);
                     _logger.LogInformation($"{_Lluitadors[elQueRep].Nom} ({_Lluitadors[elQueRep].Vida}) rep un cop al {pica} de {_Lluitadors[elQuePica].Nom} ({_Lluitadors[elQuePica].Vida})");
                 }
                 else
