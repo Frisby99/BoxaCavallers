@@ -35,7 +35,7 @@ func (ll Aleatori) GetNom() string {
 // Protegeix retorna els llocs en que es protegeix
 func (ll Aleatori) Protegeix() []cops.LlocOnPicar {
 	nous := make([]cops.LlocOnPicar, len(ll.llocs)-1, len(ll.llocs)-1)
-	eliminar := ll.Pica()
+	_, eliminar := ll.Pica()
 	for _, element := range ll.llocs {
 		if element != eliminar {
 			nous = append(nous, element)
@@ -45,6 +45,6 @@ func (ll Aleatori) Protegeix() []cops.LlocOnPicar {
 }
 
 // Pica retorna on pica
-func (ll Aleatori) Pica() cops.LlocOnPicar {
-	return ll.llocs[rand.Intn(len(ll.llocs))]
+func (ll Aleatori) Pica() (cops.Atac, cops.LlocOnPicar) {
+	return cops.Normal, ll.llocs[rand.Intn(len(ll.llocs))]
 }

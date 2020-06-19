@@ -39,7 +39,7 @@ func (ring *Ring) Lluiteu() ([]Resultat, error) {
 		elQueRep := (elQuePica + 1) % 2
 
 		proteccio := ring.resultat[elQueRep].GetLluitador().Protegeix()
-		pica := ring.resultat[elQuePica].GetLluitador().Pica()
+		_, pica := ring.resultat[elQuePica].GetLluitador().Pica()
 
 		efecteSobreDefensor := 0
 		efecteSobreAtacant := 0

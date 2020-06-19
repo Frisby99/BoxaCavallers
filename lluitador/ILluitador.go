@@ -6,5 +6,5 @@ import "github.com/utrescu/CombatCavallers.Go/cops"
 type ILluitador interface {
 	GetNom() string
 	Protegeix() []cops.LlocOnPicar
-	Pica() cops.LlocOnPicar
+	Pica() (cops.Atac, cops.LlocOnPicar)
 }
