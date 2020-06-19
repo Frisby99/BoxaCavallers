@@ -39,11 +39,12 @@ func (ring *Ring) Lluiteu() ([]Resultat, error) {
 
 		proteccio := ring.resultat[elQueRep].GetLluitador().Protegeix()
 		pica := ring.resultat[elQuePica].GetLluitador().Pica()
+		forca := 1
 
 		haRebut := contains(proteccio, pica) || pica == cops.Collons
 
 		if haRebut {
-			ring.resultat[elQueRep].TreuVida(ring.resultat[elQueRep].GetLluitador().GetForca())
+			ring.resultat[elQueRep].TreuVida(forca)
 			log.Printf("%s rep un cop %s de %s", ring.resultat[elQueRep].GetNom(), pica, ring.resultat[elQuePica].GetNom())
 		} else {
 			log.Printf("%s atura el cop %s de %s", ring.resultat[elQueRep].GetNom(), pica, ring.resultat[elQuePica].GetNom())

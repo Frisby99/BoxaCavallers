@@ -7,5 +7,4 @@ type ILluitador interface {
 	GetNom() string
 	Protegeix() []cops.LlocOnPicar
 	Pica() cops.LlocOnPicar
-	GetForca() int
 }
