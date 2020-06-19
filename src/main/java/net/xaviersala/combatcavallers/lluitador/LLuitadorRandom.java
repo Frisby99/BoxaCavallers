@@ -20,8 +20,6 @@ public class LLuitadorRandom implements ILluitador {
 
 	private String nom;
 
-	private int Força = 1;
-
 	List<LlocOnPicar> copsPossibles;
 
 	/**
@@ -31,8 +29,8 @@ public class LLuitadorRandom implements ILluitador {
 	 */
 	public LLuitadorRandom(String nomBoxejador) {
 		nom = nomBoxejador;
-		copsPossibles = new ArrayList<>(Arrays.asList(LlocOnPicar.values()));
-		copsPossibles.remove(LlocOnPicar.CopIlegal);
+		copsPossibles = new ArrayList<LlocOnPicar>(
+				Arrays.asList(LlocOnPicar.Cap, LlocOnPicar.CostatDret, LlocOnPicar.CostatEsquerra, LlocOnPicar.Panxa));
 	}
 
 	/**
@@ -69,11 +67,6 @@ public class LLuitadorRandom implements ILluitador {
 	 */
 	public String toString() {
 		return nom;
-	}
-
-	@Override
-	public int ForçaDelCop() {
-		return Força;
 	}
 
 }
