@@ -2,6 +2,7 @@ package combat
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"math/rand"
 
@@ -40,11 +41,32 @@ func (ring *Ring) Lluiteu() ([]Resultat, error) {
 		proteccio := ring.resultat[elQueRep].GetLluitador().Protegeix()
 		pica := ring.resultat[elQuePica].GetLluitador().Pica()
 
+		efecteSobreDefensor := 0
+		efecteSobreAtacant := 0
+		missatge := ""
+
+		switch pica {
+		case cops.Cap, cops.CostatDret, cops.CostatEsquerra, cops.Panxa:
+			efecteSobreDefensor = 1
+			efecteSobreAtacant = 0
+			missatge = fmt.Sprintf("%s rep un cop %s de %s", ring.resultat[elQueRep].GetNom(), pica, ring.resultat[elQuePica].GetNom())
+			break
+		case cops.Collons:
+			efecteSobreDefensor = 1
+			efecteSobreAtacant = 0
+			missatge = fmt.Sprintf("%s rep un cop ILEGAL de %s", ring.resultat[elQueRep].GetNom(), ring.resultat[elQuePica].GetNom())
+			break
+		default:
+			missatge = "No ha passat res"
+			break
+		}
+
 		haRebut := contains(proteccio, pica) || pica == cops.Collons
 
 		if haRebut {
-			ring.resultat[elQueRep].TreuVida(ring.resultat[elQueRep].GetLluitador().GetForca())
-			log.Printf("%s rep un cop %s de %s", ring.resultat[elQueRep].GetNom(), pica, ring.resultat[elQuePica].GetNom())
+			ring.resultat[elQueRep].TreuVida(efecteSobreDefensor)
+			ring.resultat[elQuePica].TreuVida(efecteSobreAtacant)
+			log.Printf(missatge)
 		} else {
 			log.Printf("%s atura el cop %s de %s", ring.resultat[elQueRep].GetNom(), pica, ring.resultat[elQuePica].GetNom())
 		}

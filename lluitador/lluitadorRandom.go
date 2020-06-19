@@ -32,11 +32,6 @@ func (ll Aleatori) GetNom() string {
 	return ll.nom
 }
 
-// GetForca retorna el nom del lluitador
-func (ll Aleatori) GetForca() int {
-	return 1
-}
-
 // Protegeix retorna els llocs en que es protegeix
 func (ll Aleatori) Protegeix() []cops.LlocOnPicar {
 	nous := make([]cops.LlocOnPicar, len(ll.llocs)-1, len(ll.llocs)-1)
