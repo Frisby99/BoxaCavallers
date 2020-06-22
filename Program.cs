@@ -20,7 +20,7 @@ namespace CombatCavallers
             // Comença la lluita
 
             var lluitador1 = new LluitadorRandom("Totxo");
-            var lluitador2 = new LluitadorRandom("Matxaca");
+            var lluitador2 = new LluitadorTrampos("Tramposete");
 
             ring.EntradaLluitadors(lluitador1, lluitador2);
             var resultats = ring.Lluiteu();
